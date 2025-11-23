@@ -1,0 +1,52 @@
+run:
+  timeout: 3m
+  tests: true
+  modules-download-mode: readonly
+
+output:
+  print-issued-lines: true
+  sort-results: true
+
+linters:
+  disable-all: true
+  enable:
+    - govet
+    - staticcheck
+    - errcheck
+    - gosimple
+    - ineffassign
+    - unused
+    - typecheck
+    - gofumpt
+    - revive
+    - gocyclo
+    - dupl
+    - nakedret
+    - misspell
+    - gosec
+  fast: false
+
+linters-settings:
+  gocyclo:
+    min-complexity: 15
+  dupl:
+    threshold: 150
+  revive:
+    severity: warning
+    rules:
+      - name: exported
+      - name: indent-error-flow
+  gofumpt:
+    extra-rules: true
+  misspell:
+    locale: US
+
+issues:
+  exclude-use-default: false
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  uniq-by-line: true
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - gosec

@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: review_assigner_database
+    environment:
+      POSTGRES_DB: reasdb
+      POSTGRES_USER: reassv
+      POSTGRES_PASSWORD: reassv
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./migrations:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U reassv -d reasdb"]
+      interval: 1s
+      timeout: 1s
+
+  app:
+    build: .
+    container_name: review_assigner_service
+    environment:
+      DATABASE_URL: postgres://reassv:reassv@db:5432/reasdb?sslmode=disable
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
