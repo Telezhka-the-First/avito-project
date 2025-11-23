@@ -10,10 +10,10 @@
 
 Результаты тестов:
 
-![load_test](images\load_test.png)
+![load_test](images/load_test.png)
 
 
-![load_deactivate](images\load_deactivate.png)
+![load_deactivate](images/load_deactivate.png)
 
 
-![integration](images\integration.png)
+![integration](images/integration.png)
